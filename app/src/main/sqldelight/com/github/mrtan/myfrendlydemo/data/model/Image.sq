@@ -1,0 +1,10 @@
+CREATE TABLE image_preview (
+    _id INTEGER PRIMARY KEY AUTOINCREMENT,
+    post_id INTEGER NOT NULL,
+    FOREIGN KEY (post_id) REFERENCES post(_id)
+);
+
+select_all:
+SELECT *
+FROM image_preview
+WHERE post_id = ?;
