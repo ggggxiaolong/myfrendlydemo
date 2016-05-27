@@ -6,7 +6,7 @@ import rx.Observable;
 
 public interface Store<T, V> {
 
-    Observable<T> get(@NonNull V requestObject);
+    Observable<T> get(@NonNull V request);
 
-    Observable<T> fresh(@NonNull V requestObject);
+    Observable<T> fresh(@NonNull V request);
 }
