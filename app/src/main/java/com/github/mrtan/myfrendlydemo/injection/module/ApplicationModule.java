@@ -2,7 +2,6 @@ package com.github.mrtan.myfrendlydemo.injection.module;
 
 import android.app.Application;
 import android.content.Context;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.github.mrtan.myfrendlydemo.BuildConfig;
@@ -12,7 +11,6 @@ import com.github.mrtan.myfrendlydemo.data.remote.Api;
 import com.github.mrtan.myfrendlydemo.util.DateDeSerializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.internal.bind.DateTypeAdapter;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
@@ -88,9 +86,9 @@ public class ApplicationModule {
                                   @NonNull OkHttpClient okHttpClient) {
         return new Picasso.Builder(boxBeeApplication)
                 .downloader(new OkHttp3Downloader(okHttpClient))
-                .listener((picasso,uri,exception) ->{
-                    Timber.e(exception,"there is something wrong with Picasso at URi: %s" , uri);
-                })
+                .listener((picasso,uri,exception) ->
+                    Timber.e(exception,"there is something wrong with Picasso at URi: %s" , uri)
+                )
                 .build();
     }
 
