@@ -13,15 +13,20 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import timber.log.Timber;
+
 public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
 
     private List<Post> mPosts = new ArrayList<>();
 
     @Inject
-    public PostAdapter() {}
+    public PostAdapter() {
+        Timber.i("PostAdapter init");
+    }
 
     @Override
     public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Timber.i("onCreateViewHolder was call");
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.article_item, parent, false);
@@ -30,6 +35,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
 
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position) {
+        Timber.i("onBindViewHolder was call");
         holder.onBind(mPosts.get(position));
     }
 

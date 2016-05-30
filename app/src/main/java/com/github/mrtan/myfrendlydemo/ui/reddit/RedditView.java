@@ -15,9 +15,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import timber.log.Timber;
 
-//TODO
-public class RedditView extends CoordinatorLayout implements RedditMVPView{
+public class RedditView extends CoordinatorLayout implements RedditMVPView {
 
     @Inject
     RedditPresenter mRedditPresenter;
@@ -36,7 +36,7 @@ public class RedditView extends CoordinatorLayout implements RedditMVPView{
 
     public RedditView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        ((BaseActivity)context)
+        ((BaseActivity) context)
                 .getActivityComponent()
                 .inject(this);
     }
@@ -63,6 +63,7 @@ public class RedditView extends CoordinatorLayout implements RedditMVPView{
 
     @Override
     public void showPosts(List<Post> posts) {
+        Timber.i("showPosts %d", posts.size());
         mRedditRecyclerView.mAdapter.setPosts(posts);
     }
 }

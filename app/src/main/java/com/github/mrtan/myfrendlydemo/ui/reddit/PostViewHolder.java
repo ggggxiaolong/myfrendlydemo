@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class PostViewHolder extends RecyclerView.ViewHolder {
 
@@ -52,10 +53,10 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
                 build();
         BitmapTransform transform = new BitmapTransform(image, mMaxWidth, mMaxHeight);
 
-        setSpacer(transform.targetHeight() >= transform.targetWidth());
+        setSpacer(transform.targetHeight() < transform.targetWidth());
 
         setThumbnail(transform.targetWidth(), transform.targetHeight());
-
+        Timber.i("get image from net");
         Picasso.with(itemView.getContext())
                 .load(article.url())
                 .transform(transform)

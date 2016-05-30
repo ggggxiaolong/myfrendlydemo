@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import dagger.Lazy;
 import rx.Observable;
+import timber.log.Timber;
 
 public class RedditStore extends BaseStore<RedditData, String> {
 
@@ -28,6 +29,7 @@ public class RedditStore extends BaseStore<RedditData, String> {
 
     @Override
     protected Observable<RedditData> fetch(String forceNetwork, @Nullable String limit) {
+        Timber.i("fetch was call");
         return api.get().aww("50", forceNetwork);
     }
 }

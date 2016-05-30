@@ -7,6 +7,7 @@ import com.github.mrtan.myfrendlydemo.util.FriendlyScheduler;
 import javax.inject.Inject;
 
 import rx.Subscription;
+import timber.log.Timber;
 
 public class RedditPresenter extends BasePresenter<RedditMVPView> {
 
@@ -32,6 +33,7 @@ public class RedditPresenter extends BasePresenter<RedditMVPView> {
     }
 
     public void loadPosts() {
+        Timber.i("loadPost was call");
         checkViewAttached();
         mSubscription = mRedditReader
                 .readPosts()

@@ -6,10 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-//TODO
 import com.github.mrtan.myfrendlydemo.ui.base.BaseActivity;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 
 public class RedditRecyclerView extends RecyclerView {
@@ -28,6 +29,7 @@ public class RedditRecyclerView extends RecyclerView {
     public RedditRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         ((BaseActivity)context).getActivityComponent().inject(this);
+        Timber.i("RedditRecyclerView init");
     }
 
     @Override
