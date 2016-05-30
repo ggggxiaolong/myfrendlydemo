@@ -9,7 +9,8 @@ import com.squareup.picasso.Transformation;
 public final class BitmapTransform implements Transformation{
 
     Image mImage;
-    private int mMaxWidth,mMaxHeight,mTargetWidth, mTargetHeight;
+    private int mMaxWidth,mMaxHeight;
+    public int targetWidth, targetHeight;
 
     public BitmapTransform(Image image, int maxWidth, int maxHeight) {
         mImage = image;
@@ -19,19 +20,19 @@ public final class BitmapTransform implements Transformation{
         double aspectRatio;//纵横比
         if (image.width() >= image.height()){
             //宽度大于高度
-            mTargetWidth = maxWidth;
+            targetWidth = maxWidth;
             aspectRatio = (double)image.height() / image.width();
-            mTargetHeight = (int) (mTargetWidth * aspectRatio);
+            targetHeight = (int) (targetWidth * aspectRatio);
         } else {
-            mTargetHeight = maxHeight;
+            targetHeight = maxHeight;
             aspectRatio = (double)image.width() / image.height();
-            mTargetWidth = (int) (mTargetHeight * aspectRatio);
+            targetWidth = (int) (targetHeight * aspectRatio);
         }
     }
 
     @Override
     public Bitmap transform(Bitmap source) {
-        Bitmap target = Bitmap.createScaledBitmap(source, mTargetWidth, mTargetHeight, false);
+        Bitmap target = Bitmap.createScaledBitmap(source, targetWidth, targetHeight, false);
         if (target != source) {
             source.recycle();
         }
@@ -40,14 +41,7 @@ public final class BitmapTransform implements Transformation{
 
     @Override
     public String key() {
-        return mImage.url() + "_" +mTargetWidth +":" + mTargetHeight;
+        return mImage.url() + "_" + targetWidth +":" + targetHeight;
     }
 
-    public int targetWidth() {
-        return mTargetWidth;
-    }
-
-    public int targetHeight() {
-        return mTargetHeight;
-    }
 }
