@@ -19,7 +19,6 @@ import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 public class PostViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,8 +31,12 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     @Inject
     DeviceUtils mDecideUtils;
 
+    @Inject
+    Picasso mPicasso;
+
     public PostViewHolder(View itemView) {
         super(itemView);
+        ((BaseActivity) itemView.getContext()).getActivityComponent().inject(this);
         performInjection(itemView);
         findViews(itemView);
         setMaxDimensions(itemView);
@@ -53,14 +56,12 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
                 build();
         BitmapTransform transform = new BitmapTransform(image, mMaxWidth, mMaxHeight);
 
-        setSpacer(transform.targetHeight() < transform.targetWidth());
+        setSpacer(transform.targetHeight < transform.targetWidth);
 
-        setThumbnail(transform.targetWidth(), transform.targetHeight());
-        Timber.i("get image from net");
-        Picasso.with(itemView.getContext())
-                .load(article.url())
+        setThumbnail(transform.targetWidth, transform.targetHeight);
+        mPicasso.load(article.url())
                 .transform(transform)
-                .resize(transform.targetWidth(), transform.targetHeight())
+                .resize(transform.targetWidth, transform.targetHeight)
                 .centerInside()
                 .placeholder(R.color.gray80)
                 .into(mThumbnail);
@@ -76,7 +77,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setSpacer(boolean b){
-        //如果宽大于高就补一个空白
+        //如果宽小于高就补一个空白
         if (b){
             mTopSpace.setVisibility(View.GONE);
         } else {
