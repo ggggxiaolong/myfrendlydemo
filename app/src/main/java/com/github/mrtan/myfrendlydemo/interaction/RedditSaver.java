@@ -9,6 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Observable;
+import timber.log.Timber;
 
 public class RedditSaver extends Interaction {
 
@@ -34,7 +35,7 @@ public class RedditSaver extends Interaction {
                 .title(post.title())
                 .height(image.height())
                 .width(image.width())
-                .url(post.url())
+                .url(image.url())
                 .asContentValues());
     }
 }
