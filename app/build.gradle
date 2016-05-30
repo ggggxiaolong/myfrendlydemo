@@ -20,6 +20,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -63,6 +66,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
     compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
     compile 'com.jakewharton.timber:timber:4.1.2'
 
     apt "org.immutables:value:2.2" // <-- for annotation processor
@@ -102,4 +106,10 @@ dependencies {
     apt daggerCompiler
     testApt daggerCompiler
     androidTestApt daggerCompiler
+
+    //XLog
+    debugCompile 'com.github.promeg:xlog-compiler:2.1.1' // ~6kB
+    debugCompile 'com.github.promeg:xlog-android:2.1.1' // ~150kB
+
+    releaseCompile 'com.github.promeg:xlog-android-idle:2.1.1' // ~5kB
 }
