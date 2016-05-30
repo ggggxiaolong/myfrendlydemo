@@ -1,9 +1,9 @@
 CREATE TAble post (
-    _id INTEGER PRIMARY KEY AUTOINCREMENT,
+    _id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     title TEXT NOT NULL,
     url TEXT NOT NULL,
-    height INTEGER AS Integer NULL,
-    width INTEGER AS Integer NULL
+    height INTEGER AS Integer NOT NULL,
+    width INTEGER AS Integer NOT NULL
 );
 
 select_all:
